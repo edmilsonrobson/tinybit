@@ -12,9 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('front-page');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/short-urls', 'ShortUrlController@store');
+
+/* Redirect url */
+Route::get('/{token}', 'ShortUrlController@redirect');

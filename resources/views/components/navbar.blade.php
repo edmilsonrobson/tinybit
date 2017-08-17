@@ -1,6 +1,6 @@
 <nav class="navbar">
     <div class="navbar-brand">
-        <a class="navbar-item is-size-4" href="http://bulma.io">
+        <a class="navbar-item is-size-4" href="{{ URL::to('/') }}">
             Tinybit
         </a>
 
