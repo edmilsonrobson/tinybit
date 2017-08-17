@@ -1,95 +1,80 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+    <title>Tinybit</title>
+    <link href="/css/app.css" rel="stylesheet" type="text/css">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+</head>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+<body>
 
-            .full-height {
-                height: 100vh;
-            }
+@include('components.navbar')
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+<section class="hero is-medium is-primary">
+    <div class="hero-body has-text-centered">
+        <div class="container">
 
-            .position-ref {
-                position: relative;
-            }
+            <h1 class="title is-size-1">
+                Tinybit
+            </h1>
+            <h2 class="subtitle">
+                URL Shortener
+            </h2>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+            <br>
 
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    <input class="input is-large" type="text" placeholder="Shorten your url here...">
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="column is-1">
+                    <button class="button is-large is-info">
+                        Tinybit it!
+                    </button>
                 </div>
             </div>
+            <br>
+            <div class="columns is-centered">
+                <div class="column is-5">
+                    <p class="is-size-4"><i>"Do not worry if you have built your castles in the air. They are where they should be. Now put the foundations under them."</i></p>
+                    <p class="is-size-5 is-pulled-right">—— <b>Henry David Thoreau</b></p>
+                </div>
+            </div>
+
         </div>
-    </body>
+        <br>
+        <div class="container">
+            <div class="columns is-centered">
+                <a class="button" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+                  <span class="icon">
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                  </span>
+                    <span>Github</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Tinybit</strong> by <a href="https://github.com/edmilsonrobson/">Edmilson Rocha</a>
+                and <a href="https://github.com/liviolima">Lívio Lima</a> with <span class="has-text-danger">♥</span>.
+            </p>
+            <p>
+                The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+                <br>
+                The website content is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
+            </p>
+        </div>
+    </div>
+</footer>
+</body>
 </html>
+
