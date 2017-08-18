@@ -36,6 +36,7 @@ class ShortUrlController extends Controller
     public function store(Request $request)
     {
 
+
          $validator = Validator::make($request->all(), [
             'full_url' => 'required|url',
          
@@ -43,9 +44,15 @@ class ShortUrlController extends Controller
 
          if ($validator->fails()) {
             
-            return redirect('post/')
+            return redirect('/')
                         ->withErrors($validator)
                         ->withInput();
+        }
+   
+        $ip = $request->ip();
+        $ip_count = ShortUrl::where(‘ip_address’, $ip)->count();
+        if ($ip_count > 3) {
+            return redirect(‘/’) ->withErrors(['You can only use it three times during 24 hours.']);
         }
 
         do{
