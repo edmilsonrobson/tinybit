@@ -14,6 +14,7 @@
 
                 <br>
 
+                @include('common.errors')
                 <form action="/short-urls" method="POST">
                     {{ csrf_field() }}
                     <div class="columns is-centered">
