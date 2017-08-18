@@ -50,9 +50,9 @@ class ShortUrlController extends Controller
         }
    
         $ip = $request->ip();
-        $ip_count = ShortUrl::where(‘ip_address’, $ip)->count();
+        $ip_count = ShortUrl::where('ip_address', $ip)->count();
         if ($ip_count > 3) {
-            return redirect(‘/’) ->withErrors(['You can only use it three times during 24 hours.']);
+            return redirect('/') ->withErrors(['You can only use it three times during 24 hours.']);
         }
 
         do{
