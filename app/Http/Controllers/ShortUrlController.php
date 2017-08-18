@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\ShortUrl;
 use Illuminate\Http\Request;
 
@@ -34,6 +35,18 @@ class ShortUrlController extends Controller
      */
     public function store(Request $request)
     {
+
+         $validator = Validator::make($request->all(), [
+            'full_url' => 'required|url',
+         
+         ]);
+
+         if ($validator->fails()) {
+            
+            return redirect('post/')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         do{
             $token = bin2hex(random_bytes(3));
