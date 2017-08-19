@@ -50,7 +50,7 @@ class ShortUrlController extends Controller
         }
    
         $ip = $request->ip();
-        $ip_count = ShortUrl::where('creator_ip_address', $ip)->count();
+        $ip_count = ShortUrl::where('creator_ip_address', $ip)->where('created_at', '>' , Carbon::now()->subDays(1))->count();
         
         if ($ip_count > 3) {
             return redirect('/') ->withErrors(['You can only use it three times during 24 hours.']);
