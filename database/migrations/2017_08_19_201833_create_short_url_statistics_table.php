@@ -15,7 +15,7 @@ class CreateShortUrlStatisticsTable extends Migration
     {
         Schema::create('short_url_statistics', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('full_url', 2048);
+            $table->foreign('short_url_id')->references('id')->on('short_urls');
             $table->unsignedInteger('clicks')->default(0);
             $table->timestamps();
         });

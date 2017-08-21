@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Validator;
+use Carbon\Carbon;
 use App\ShortUrl;
 use Illuminate\Http\Request;
 
@@ -55,6 +56,8 @@ class ShortUrlController extends Controller
         if ($ip_count > 3) {
             return redirect('/') ->withErrors(['You can only use it three times during 24 hours.']);
         }
+
+        
 
         do{
             $token = bin2hex(random_bytes(3));
@@ -123,6 +126,11 @@ class ShortUrlController extends Controller
 
     public function redirect(string $token) {
         $short_url = ShortUrl::whereToken($token)->firstOrFail();
+
+        $shorl_url_search = ShortUrl::where('token', $token);
+
+        ShortUrlStatistics::table('short_url_statistics')->where('short_url_id',$shorl_url_search->id)->increment('clicks');
+
 
         return redirect($short_url->full_url);
     }
