@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use Carbon\Carbon;
 use App\ShortUrl;
+use App\ShortUrlStatistics;
 use Illuminate\Http\Request;
 
 class ShortUrlController extends Controller
@@ -129,7 +130,7 @@ class ShortUrlController extends Controller
 
         $shorl_url_search = ShortUrl::where('token', $token);
 
-        ShortUrlStatistics::table('short_url_statistics')->where('short_url_id',$shorl_url_search->id)->increment('clicks');
+        //ShortUrlStatistics::table('short_url_statistics')->where('short_url_id',$shorl_url_search->id)->increment('clicks');
 
 
         return redirect($short_url->full_url);
