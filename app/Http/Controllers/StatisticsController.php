@@ -47,17 +47,14 @@ class StatisticsController extends Controller
      */
     public function show($token)
     {
-        //
-    
-    $shorl_url = ShortUrl::where('token', $token)->first();
 
-    //dd($shorl_url);
+    $short_url = ShortUrl::where('token', $token)->first();
 
-    $short_url_statistics = ShortUrlStatistics::where('short_url_id', $shorl_url->id)->first();
 
-    //dd($short_url_statistics);
+    $short_url_statistics = $short_url->shortUrlStatistics->first();
 
-    return view('statistics', [ 'shortUrl' => $shorl_url, 'shortUrlStatistics' => $short_url_statistics]);  
+
+    return view('statistics', [ 'shortUrl' => $short_url, 'shortUrlStatistics' => $short_url_statistics]);
 
     }
 
@@ -95,4 +92,6 @@ class StatisticsController extends Controller
     {
         //
     }
+
+
 }

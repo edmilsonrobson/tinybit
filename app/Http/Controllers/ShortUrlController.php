@@ -38,7 +38,6 @@ class ShortUrlController extends Controller
     public function store(Request $request)
     {
 
-
          $validator = Validator::make($request->all(), [
             'full_url' => 'required|url',
          
@@ -51,15 +50,13 @@ class ShortUrlController extends Controller
                         ->withInput();
         }
 
-/*
         $ip = $request->ip();
         $ip_count = ShortUrl::where('creator_ip_address', $ip)->where('created_at', '>' , Carbon::now()->subDays(1))->count();
         
         if ($ip_count > 3) {
             return redirect('/') ->withErrors(['You can only use it three times during 24 hours.']);
         }
-*/
-        
+
 
         do{
             $token = bin2hex(random_bytes(3));
@@ -136,7 +133,6 @@ class ShortUrlController extends Controller
 
         $short_url_search = ShortUrl::where('token', $token)->first();
 
-        //dd($short_url_search->id);
 
         ShortUrlStatistics::where('short_url_id',$short_url_search->id)->increment('clicks');
 
