@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Validator;
+use Carbon\Carbon;
 use App\ShortUrl;
+use App\ShortUrlStatistics;
 use Illuminate\Http\Request;
 
 class ShortUrlController extends Controller
@@ -36,7 +38,6 @@ class ShortUrlController extends Controller
     public function store(Request $request)
     {
 
-
          $validator = Validator::make($request->all(), [
             'full_url' => 'required|url',
          
@@ -48,13 +49,14 @@ class ShortUrlController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-   
+
         $ip = $request->ip();
         $ip_count = ShortUrl::where('creator_ip_address', $ip)->where('created_at', '>' , Carbon::now()->subDays(1))->count();
         
         if ($ip_count > 3) {
             return redirect('/') ->withErrors(['You can only use it three times during 24 hours.']);
         }
+
 
         do{
             $token = bin2hex(random_bytes(3));
@@ -66,6 +68,11 @@ class ShortUrlController extends Controller
         ]);
 
         $short_url = ShortUrl::create($request->all());
+
+        $short_url_statistics = ShortUrlStatistics::create([
+            'short_url_id' => $short_url->id,
+
+        ]);
 
         if ($request->isJson()){
             return $short_url->toJson();
@@ -123,6 +130,12 @@ class ShortUrlController extends Controller
 
     public function redirect(string $token) {
         $short_url = ShortUrl::whereToken($token)->firstOrFail();
+
+        $short_url_search = ShortUrl::where('token', $token)->first();
+
+
+        ShortUrlStatistics::where('short_url_id',$short_url_search->id)->increment('clicks');
+
 
         return redirect($short_url->full_url);
     }
