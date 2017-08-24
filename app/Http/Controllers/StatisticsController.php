@@ -51,7 +51,7 @@ class StatisticsController extends Controller
     $short_url = ShortUrl::where('token', $token)->first();
 
 
-    $short_url_statistics = $short_url->shortUrlStatistics->first();
+    $short_url_statistics = $short_url->shortUrlStatistics;
 
 
     return view('statistics', [ 'shortUrl' => $short_url, 'shortUrlStatistics' => $short_url_statistics]);
