@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<h1> {{ $shortUrl->full_url }}</h1>
+<h1> Numbers of clicks of this URL: {{$shortUrlStatistics->clicks}} </h1>
 
 @endsection

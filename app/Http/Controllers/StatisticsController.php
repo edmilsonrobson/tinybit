@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\ShortUrl;
+use App\ShortUrlStatistics;
 use Illuminate\Http\Request;
 
 class StatisticsController extends Controller
@@ -43,9 +45,20 @@ class StatisticsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($token)
     {
         //
+    
+    $shorl_url = ShortUrl::where('token', $token)->first();
+
+    //dd($shorl_url);
+
+    $short_url_statistics = ShortUrlStatistics::where('short_url_id', $shorl_url->id)->first();
+
+    //dd($short_url_statistics);
+
+    return view('statistics', [ 'shortUrl' => $shorl_url, 'shortUrlStatistics' => $short_url_statistics]);  
+
     }
 
     /**
@@ -57,6 +70,7 @@ class StatisticsController extends Controller
     public function edit($id)
     {
         //
+
     }
 
     /**
